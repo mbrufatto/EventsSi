@@ -22,6 +22,8 @@
 		614FE66B248FC5CB00F1318F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE66A248FC5CB00F1318F /* NetworkManager.swift */; };
 		614FE66D248FC5E600F1318F /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE66C248FC5E600F1318F /* NetworkManagerProtocol.swift */; };
 		614FE66F248FC70900F1318F /* ListEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE66E248FC70900F1318F /* ListEventViewController.swift */; };
+		614FE671248FC8E000F1318F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE670248FC8E000F1318F /* EventTableViewCell.swift */; };
+		614FE673248FDAEF00F1318F /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE672248FDAEF00F1318F /* Address.swift */; };
 		C86928A13E2F609A247AE95E /* Pods_EventsSiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD9BE84CD0F9A1E78BE4CAB /* Pods_EventsSiTests.framework */; };
 		E57699BFE7E52B6444AC560C /* Pods_EventsSi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D489B2BC9BA34F5805B7B68D /* Pods_EventsSi.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		614FE66A248FC5CB00F1318F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		614FE66C248FC5E600F1318F /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		614FE66E248FC70900F1318F /* ListEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEventViewController.swift; sourceTree = "<group>"; };
+		614FE670248FC8E000F1318F /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		614FE672248FDAEF00F1318F /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		7893E0E8905DDBE828D32B5E /* Pods-EventsSiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsSiTests.release.xcconfig"; path = "Target Support Files/Pods-EventsSiTests/Pods-EventsSiTests.release.xcconfig"; sourceTree = "<group>"; };
 		9CD9BE84CD0F9A1E78BE4CAB /* Pods_EventsSiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventsSiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D489B2BC9BA34F5805B7B68D /* Pods_EventsSi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventsSi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				614FE65E248FBFFD00F1318F /* Event.swift */,
+				614FE672248FDAEF00F1318F /* Address.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				614FE66E248FC70900F1318F /* ListEventViewController.swift */,
+				614FE670248FC8E000F1318F /* EventTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -379,7 +385,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				614FE671248FC8E000F1318F /* EventTableViewCell.swift in Sources */,
 				614FE66B248FC5CB00F1318F /* NetworkManager.swift in Sources */,
+				614FE673248FDAEF00F1318F /* Address.swift in Sources */,
 				614FE664248FC31D00F1318F /* DoubleExtension.swift in Sources */,
 				614FE65F248FBFFD00F1318F /* Event.swift in Sources */,
 				614FE62E248FB50F00F1318F /* AppDelegate.swift in Sources */,

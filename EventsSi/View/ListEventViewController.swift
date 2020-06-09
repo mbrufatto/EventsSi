@@ -9,33 +9,66 @@
 import UIKit
 
 class ListEventViewController: UIViewController {
-
+    
+    private var tableView: UITableView!
     private var listEventViewModel: ListEventViewModelProtocol
+    private var activityindicator: UIActivityIndicatorView!
     
     init(listEventViewModelProtocol: ListEventViewModelProtocol? = nil) {
-           self.listEventViewModel = listEventViewModelProtocol ?? ListEventViewModel()
-           super.init(nibName: nil, bundle: nil)
-       }
-       
-       required init?(coder: NSCoder) {
-           fatalError("init(coder:) has not been implemented")
-       }
+        self.listEventViewModel = listEventViewModelProtocol ?? ListEventViewModel()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.setupComponents()
+        self.setupConstraints()
+        
+        listEventViewModel.loadEvents(completion: {(events) in
+            self.tableView.reloadData()
+        })
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    internal func setupComponents() {
+        
+        self.title = "Eventos"
+        
+        self.tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        
+        tableView.separatorStyle = .none
+        tableView.dataSource = self
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
+        tableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.identifier)
     }
-    */
+    
+    internal func setupConstraints() {
+        
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
+}
 
+extension ListEventViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listEventViewModel.numberOfRows()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: EventTableViewCell.identifier) as! EventTableViewCell
+        cell.event = listEventViewModel.eventAt(indexPath.row)
+        return cell
+    }
 }

@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 class NetworkManager: NetworkManagerProtocol {
     
     func getEvents(completion: @escaping GetEventsClosure) {
@@ -25,6 +23,29 @@ class NetworkManager: NetworkManagerProtocol {
                         completion(decodedEvents)
                     } catch {
                         print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func getAddressByLatitudeAndLongitude(latitude: String, longitude: String, completion: @escaping GetEventAddressClosure) {
+        
+        let url = URL(string: "http://nominatim.openstreetmap.org/reverse?lat=\(latitude)&lon=\(longitude)&format=json")
+        
+        let dataTask = URLSession.shared.dataTask(with: URLRequest(url: url!)) { (data, response, error) in
+            
+            DispatchQueue.main.async {
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    do {
+                        let decodedAddress = try decoder.decode(AddressBase.self, from: data)
+                        completion(decodedAddress.address)
+                    } catch {
+                        print(error.localizedDescription)
+                        debugPrint(error)
+                        completion(Address())
                     }
                 }
             }
