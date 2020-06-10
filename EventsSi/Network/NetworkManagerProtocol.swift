@@ -10,8 +10,10 @@ import Foundation
 
 typealias GetEventsClosure = ([Event]) -> Void
 typealias GetEventAddressClosure = (Address) -> Void
+typealias GetEventClosure = (Event) -> Void
 
 protocol NetworkManagerProtocol {
     func getEvents(completion: @escaping GetEventsClosure)
     func getAddressByLatitudeAndLongitude(latitude: String, longitude: String, completion: @escaping GetEventAddressClosure)
+    func getEvent(eventId: String, completion: @escaping GetEventClosure)
 }

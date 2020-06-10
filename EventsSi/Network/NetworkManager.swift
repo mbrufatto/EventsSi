@@ -52,4 +52,24 @@ class NetworkManager: NetworkManagerProtocol {
         }
         dataTask.resume()
     }
+    
+    func getEvent(eventId: String, completion: @escaping GetEventClosure) {
+        
+        let url = URL(string: "\(ApiConfig.baseUrl)/\(eventId)")
+        
+        let dataTask = URLSession.shared.dataTask(with: URLRequest(url: url!)) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    do {
+                        let decodedEvent = try decoder.decode(Event.self, from: data)
+                        completion(decodedEvent)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+        dataTask.resume()
+    }
 }

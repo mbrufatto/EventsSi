@@ -24,6 +24,10 @@
 		614FE66F248FC70900F1318F /* ListEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE66E248FC70900F1318F /* ListEventViewController.swift */; };
 		614FE671248FC8E000F1318F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE670248FC8E000F1318F /* EventTableViewCell.swift */; };
 		614FE673248FDAEF00F1318F /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE672248FDAEF00F1318F /* Address.swift */; };
+		6156D63C249077E800ED3786 /* DetailEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156D63B249077E800ED3786 /* DetailEventViewModel.swift */; };
+		6156D63E2490780200ED3786 /* DetailEventViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156D63D2490780200ED3786 /* DetailEventViewModelProtocol.swift */; };
+		6166A8502490322A00668009 /* DetailEventTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6166A84F2490322A00668009 /* DetailEventTest.swift */; };
+		6166A8522490325600668009 /* event.json in Resources */ = {isa = PBXBuildFile; fileRef = 6166A8512490325600668009 /* event.json */; };
 		C86928A13E2F609A247AE95E /* Pods_EventsSiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD9BE84CD0F9A1E78BE4CAB /* Pods_EventsSiTests.framework */; };
 		E57699BFE7E52B6444AC560C /* Pods_EventsSi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D489B2BC9BA34F5805B7B68D /* Pods_EventsSi.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +67,10 @@
 		614FE66E248FC70900F1318F /* ListEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEventViewController.swift; sourceTree = "<group>"; };
 		614FE670248FC8E000F1318F /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		614FE672248FDAEF00F1318F /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		6156D63B249077E800ED3786 /* DetailEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventViewModel.swift; sourceTree = "<group>"; };
+		6156D63D2490780200ED3786 /* DetailEventViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventViewModelProtocol.swift; sourceTree = "<group>"; };
+		6166A84F2490322A00668009 /* DetailEventTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventTest.swift; sourceTree = "<group>"; };
+		6166A8512490325600668009 /* event.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = event.json; sourceTree = "<group>"; };
 		7893E0E8905DDBE828D32B5E /* Pods-EventsSiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsSiTests.release.xcconfig"; path = "Target Support Files/Pods-EventsSiTests/Pods-EventsSiTests.release.xcconfig"; sourceTree = "<group>"; };
 		9CD9BE84CD0F9A1E78BE4CAB /* Pods_EventsSiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventsSiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D489B2BC9BA34F5805B7B68D /* Pods_EventsSi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventsSi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +160,7 @@
 				614FE657248FBEAB00F1318F /* Resource */,
 				614FE646248FB51300F1318F /* Info.plist */,
 				614FE65C248FBF5B00F1318F /* ListEventsTest.swift */,
+				6166A84F2490322A00668009 /* DetailEventTest.swift */,
 			);
 			path = EventsSiTests;
 			sourceTree = "<group>";
@@ -178,6 +187,8 @@
 			children = (
 				614FE665248FC55F00F1318F /* ListEventViewModelProtocol.swift */,
 				614FE667248FC59400F1318F /* ListEventViewModel.swift */,
+				6156D63B249077E800ED3786 /* DetailEventViewModel.swift */,
+				6156D63D2490780200ED3786 /* DetailEventViewModelProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -195,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				614FE658248FBEEA00F1318F /* events.json */,
+				6166A8512490325600668009 /* event.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -310,6 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6166A8522490325600668009 /* event.json in Resources */,
 				614FE659248FBEEA00F1318F /* events.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +400,8 @@
 			files = (
 				614FE671248FC8E000F1318F /* EventTableViewCell.swift in Sources */,
 				614FE66B248FC5CB00F1318F /* NetworkManager.swift in Sources */,
+				6156D63C249077E800ED3786 /* DetailEventViewModel.swift in Sources */,
+				6156D63E2490780200ED3786 /* DetailEventViewModelProtocol.swift in Sources */,
 				614FE673248FDAEF00F1318F /* Address.swift in Sources */,
 				614FE664248FC31D00F1318F /* DoubleExtension.swift in Sources */,
 				614FE65F248FBFFD00F1318F /* Event.swift in Sources */,
@@ -406,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				614FE65D248FBF5B00F1318F /* ListEventsTest.swift in Sources */,
+				6166A8502490322A00668009 /* DetailEventTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
