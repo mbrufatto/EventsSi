@@ -18,6 +18,8 @@ class DetailEventViewModel: DetailEventViewModelProtocol {
     }
     
     func getEvent(eventId: String, completion: @escaping GetEventClosure) {
-        
+        self.networkManagerProtocol.getEvent(eventId: eventId, completion: { event in
+            completion(event)
+        })
     }
 }
