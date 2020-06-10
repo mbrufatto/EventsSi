@@ -10,8 +10,8 @@ import UIKit
 import Kingfisher
 import MapKit
 
-class DetailEventViewController: UIViewController {
-
+class DetailEventViewController: UIViewController, MKMapViewDelegate {
+    
     //MARK: - Properties
     var eventId: String?
     var detailEventViewModel: DetailEventViewModelProtocol
@@ -23,7 +23,7 @@ class DetailEventViewController: UIViewController {
     private var eventCityAndState = UILabel()
     private var eventPrice = UILabel()
     private var eventDescription = UILabel()
-    private var eventMap = MKMapView()
+    private var eventMap: MKMapView? = MKMapView()
     private var btnShare = UIButton(type: .roundedRect)
     private var btnCheckin = UIButton(type: .roundedRect)
     private let stackBtns = UIStackView()
@@ -77,6 +77,11 @@ class DetailEventViewController: UIViewController {
         self.loadEvent()
     }
     
+    deinit {
+        self.eventMap!.delegate = nil
+        self.eventMap = nil
+    }
+    
     private func loadEvent() {
         guard let eventId = eventId else { return }
         self.detailEventViewModel.getEvent(eventId: eventId, completion: { event in
@@ -102,11 +107,11 @@ class DetailEventViewController: UIViewController {
             self.containerView.addSubview(self.eventPrice)
             self.containerView.addSubview(self.stackBtns)
             self.containerView.addSubview(self.eventDescription)
-            self.containerView.addSubview(self.eventMap)
+            self.containerView.addSubview(self.eventMap!)
             
             self.detailEventViewModel.loadAddress(latitude: event.latitude, longitude: event.longitude, completion: { address in
                 
-                 var contentSize: CGFloat = 320
+                var contentSize: CGFloat = 320
                 
                 self.eventTitle.text = event.title
                 self.eventTitle.font = .boldSystemFont(ofSize: 20)
@@ -130,12 +135,12 @@ class DetailEventViewController: UIViewController {
                 self.eventPrice.font = .systemFont(ofSize: 16)
                 self.eventPrice.textColor = .gray
                 contentSize += self.estimatedHeightOfLabel(text: event.price.formatCurrency(), font: .systemFont(ofSize: 16)) + 8
-        
+                
                 self.stackBtns.distribution = .fillEqually
                 self.stackBtns.alignment = .fill
                 self.stackBtns.spacing = 10
                 self.stackBtns.axis = .horizontal
-
+                
                 self.btnCheckin.setTitle("Check-in", for: .normal)
                 self.btnCheckin.setTitleColor(.gray, for: .normal)
                 self.btnCheckin.layer.borderColor = UIColor.gray.cgColor
@@ -148,7 +153,8 @@ class DetailEventViewController: UIViewController {
                 self.btnShare.layer.borderColor = UIColor.gray.cgColor
                 self.btnShare.layer.borderWidth = 1
                 self.btnShare.layer.cornerRadius = 10
-
+                self.btnShare.addTarget(self, action: #selector(self.tapShareButton(_:)), for: .touchUpInside)
+                
                 self.stackBtns.addArrangedSubview(self.btnCheckin)
                 self.stackBtns.addArrangedSubview(self.btnShare)
                 contentSize += 48
@@ -160,6 +166,8 @@ class DetailEventViewController: UIViewController {
                 
                 let latitude =  (event.latitude as NSString).doubleValue
                 let longitude = (event.longitude as NSString).doubleValue
+                
+                self.eventMap!.delegate = self
                 
                 self.setCoordinateInMap(latitude: latitude, longitude: longitude, title: event.title)
                 
@@ -184,28 +192,28 @@ class DetailEventViewController: UIViewController {
     }
     
     private func estimatedHeightOfLabel(text: String, font: UIFont) -> CGFloat {
-
+        
         let size = CGSize(width: view.frame.width - 16, height: 1000)
-
+        
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-
+        
         let attributes = [NSAttributedString.Key.font: font]
-
+        
         let rectangleHeight = String(text).boundingRect(with: size, options: options, attributes: attributes, context: nil).height
-
+        
         return rectangleHeight
     }
     
     private func setCoordinateInMap(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String) {
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let region = MKCoordinateRegion(center: location, latitudinalMeters: 200, longitudinalMeters: 200)
-        
-        self.eventMap.setRegion(region, animated: true)
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
         annotation.title = title
-        self.eventMap.addAnnotation(annotation)
+        let coordinateRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 200, longitudinalMeters: 200)
+        self.eventMap!.setRegion(coordinateRegion, animated: true)
+        self.eventMap!.addAnnotation(annotation)
+        
     }
     
     internal func setupConstraints() {
@@ -215,7 +223,7 @@ class DetailEventViewController: UIViewController {
         self.eventCityAndState.translatesAutoresizingMaskIntoConstraints = false
         self.eventPrice.translatesAutoresizingMaskIntoConstraints = false
         self.eventDescription.translatesAutoresizingMaskIntoConstraints = false
-        self.eventMap.translatesAutoresizingMaskIntoConstraints = false
+        self.eventMap!.translatesAutoresizingMaskIntoConstraints = false
         self.stackBtns.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -249,11 +257,11 @@ class DetailEventViewController: UIViewController {
             self.eventDescription.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 8),
             self.eventDescription.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -8),
             
-            self.eventMap.topAnchor.constraint(equalTo: self.eventDescription.bottomAnchor, constant: 8),
-            self.eventMap.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 8),
-            self.eventMap.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -8),
-            self.eventMap.heightAnchor.constraint(equalToConstant: 269),
-            self.eventMap.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -8)
+            self.eventMap!.topAnchor.constraint(equalTo: self.eventDescription.bottomAnchor, constant: 8),
+            self.eventMap!.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 8),
+            self.eventMap!.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -8),
+            self.eventMap!.heightAnchor.constraint(equalToConstant: 269),
+            self.eventMap!.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -8)
         ])
     }
     
@@ -310,5 +318,11 @@ class DetailEventViewController: UIViewController {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
+    }
+    
+    @objc private func tapShareButton(_ sender: UIButton) {
+        let event: [Event] = [self.event!]
+        let activityController = UIActivityViewController(activityItems: event, applicationActivities: nil)
+        present(activityController, animated: true)
     }
 }
