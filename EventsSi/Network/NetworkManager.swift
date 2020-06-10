@@ -98,30 +98,31 @@ class NetworkManager: NetworkManagerProtocol {
         
         //create dataTask using the session object to send data to the server
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            
-            guard error == nil else {
-                return
-            }
-            
-            guard let data = data else {
-                return
-            }
-            
-            do {
-                //create json object from data
-                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                    guard let status = json["code"] else {
-                        return
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+                
+                do {
+                    //create json object from data
+                    if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                        guard let status = json["code"] else {
+                            return
+                        }
+                        
+                        if status as! String == "200" {
+                            completion(true)
+                        }
+                        completion(false)
                     }
-                    
-                    if status as! String == "200" {
-                        completion(true)
-                    }
+                } catch let error {
+                    print(error.localizedDescription)
                     completion(false)
                 }
-            } catch let error {
-                print(error.localizedDescription)
-                completion(false)
             }
         })
         task.resume()

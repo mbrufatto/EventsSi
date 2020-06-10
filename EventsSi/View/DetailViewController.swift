@@ -80,11 +80,9 @@ class DetailEventViewController: UIViewController {
     private func loadEvent() {
         guard let eventId = eventId else { return }
         self.detailEventViewModel.getEvent(eventId: eventId, completion: { event in
-            DispatchQueue.main.async {
-                self.event = event
-                self.setupComponents()
-                self.setupConstraints()
-            }
+            self.event = event
+            self.setupComponents()
+            self.setupConstraints()
         })
     }
     
@@ -143,6 +141,7 @@ class DetailEventViewController: UIViewController {
                 self.btnCheckin.layer.borderColor = UIColor.gray.cgColor
                 self.btnCheckin.layer.borderWidth = 1
                 self.btnCheckin.layer.cornerRadius = 10
+                self.btnCheckin.addTarget(self, action: #selector(self.tapCheckinButton(_:)), for: .touchUpInside)
                 
                 self.btnShare.setTitle("Compartilhar", for: .normal)
                 self.btnShare.setTitleColor(.gray, for: .normal)
@@ -279,8 +278,37 @@ class DetailEventViewController: UIViewController {
     }
     
     private func setNewContentSize(size: CGFloat) {
-        
         self.containerView.frame.size.height = size
         self.scrollView.contentSize.height = size
+    }
+    
+    @objc private func tapCheckinButton(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Informe seus dados",
+                                                message: "Para poder realizar o check-in, precisamos que nos infome os seu nome e e-mail", preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Informe seu nome"
+        })
+        alertController.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Informe seu e-mail"
+            textField.keyboardType = .emailAddress
+        })
+        
+        let submitAction = UIAlertAction(title: "Enviar", style: .default) { [unowned alertController] _ in
+            let name = alertController.textFields![0].text
+            let email = alertController.textFields![1].text
+            
+            if (name == nil || name!.isEmpty) || (email == nil || email!.isEmpty) {
+                alertController.dismiss(animated: true, completion: nil)
+                self.showAlert(title: "Erro", message: "Algum(s) dos campos necessários não foi informado")
+            } else {
+                self.doCheckin(name: name!, email: email!)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+        
+        alertController.addAction(submitAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
     }
 }
