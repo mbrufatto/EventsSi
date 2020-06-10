@@ -22,4 +22,16 @@ class DetailEventViewModel: DetailEventViewModelProtocol {
             completion(event)
         })
     }
+    
+    func loadAddress(latitude: String, longitude: String, completion: @escaping GetEventAddressClosure) {
+        self.networkManagerProtocol.getAddressByLatitudeAndLongitude(latitude: latitude, longitude: longitude, completion: { address in
+            completion(address)
+        })
+    }
+    
+    func doCheckin(eventId: String, name: String, email: String, completion: @escaping DoCheckinClousure) {
+        self.networkManagerProtocol.sendCheckin(eventId: eventId, name: name, email: email, completion: { result in
+            completion(result)
+        })
+    }
 }

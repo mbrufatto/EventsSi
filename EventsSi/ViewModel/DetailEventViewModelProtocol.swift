@@ -10,4 +10,6 @@ import Foundation
 
 protocol DetailEventViewModelProtocol {
     func getEvent(eventId: String, completion: @escaping GetEventClosure)
+    func loadAddress(latitude: String, longitude: String, completion: @escaping GetEventAddressClosure)
+    func doCheckin(eventId: String, name: String, email: String, completion: @escaping DoCheckinClousure)
 }
