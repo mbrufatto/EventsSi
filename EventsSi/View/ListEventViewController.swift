@@ -44,6 +44,7 @@ class ListEventViewController: UIViewController {
         
         tableView.separatorStyle = .none
         tableView.dataSource = self
+        tableView.delegate = self
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
@@ -70,5 +71,16 @@ extension ListEventViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: EventTableViewCell.identifier) as! EventTableViewCell
         cell.event = listEventViewModel.eventAt(indexPath.row)
         return cell
+    }
+}
+
+extension ListEventViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let networkManager = NetworkManager()
+        let detailEventViewModel = DetailEventViewModel(networkManagerProtocol: networkManager)
+        let detailViewController = DetailEventViewController(detailEventViewModelProtocol: detailEventViewModel)
+        detailViewController.eventId = listEventViewModel.eventAt(indexPath.row).id
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
