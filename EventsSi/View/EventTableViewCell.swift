@@ -44,7 +44,7 @@ class EventTableViewCell: UITableViewCell {
     
     private func setupEventImage() {
         eventImage.kf.indicatorType = .activity
-        eventImage.kf.setImage(with: URL(string: event.image)) { result in            
+        eventImage.kf.setImage(with: URL(string: event.image)) { result in
             switch result {
             case .success(let value):
                 self.eventImage.image = value.image

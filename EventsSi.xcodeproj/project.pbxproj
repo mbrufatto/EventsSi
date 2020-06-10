@@ -26,6 +26,7 @@
 		614FE673248FDAEF00F1318F /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE672248FDAEF00F1318F /* Address.swift */; };
 		6156D63C249077E800ED3786 /* DetailEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156D63B249077E800ED3786 /* DetailEventViewModel.swift */; };
 		6156D63E2490780200ED3786 /* DetailEventViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156D63D2490780200ED3786 /* DetailEventViewModelProtocol.swift */; };
+		6156D64224907D8800ED3786 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6156D64124907D8800ED3786 /* DetailViewController.swift */; };
 		6166A8502490322A00668009 /* DetailEventTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6166A84F2490322A00668009 /* DetailEventTest.swift */; };
 		6166A8522490325600668009 /* event.json in Resources */ = {isa = PBXBuildFile; fileRef = 6166A8512490325600668009 /* event.json */; };
 		C86928A13E2F609A247AE95E /* Pods_EventsSiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD9BE84CD0F9A1E78BE4CAB /* Pods_EventsSiTests.framework */; };
@@ -69,6 +70,7 @@
 		614FE672248FDAEF00F1318F /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		6156D63B249077E800ED3786 /* DetailEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventViewModel.swift; sourceTree = "<group>"; };
 		6156D63D2490780200ED3786 /* DetailEventViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventViewModelProtocol.swift; sourceTree = "<group>"; };
+		6156D64124907D8800ED3786 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		6166A84F2490322A00668009 /* DetailEventTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventTest.swift; sourceTree = "<group>"; };
 		6166A8512490325600668009 /* event.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = event.json; sourceTree = "<group>"; };
 		7893E0E8905DDBE828D32B5E /* Pods-EventsSiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsSiTests.release.xcconfig"; path = "Target Support Files/Pods-EventsSiTests/Pods-EventsSiTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				614FE66E248FC70900F1318F /* ListEventViewController.swift */,
 				614FE670248FC8E000F1318F /* EventTableViewCell.swift */,
+				6156D64124907D8800ED3786 /* DetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				614FE673248FDAEF00F1318F /* Address.swift in Sources */,
 				614FE664248FC31D00F1318F /* DoubleExtension.swift in Sources */,
 				614FE65F248FBFFD00F1318F /* Event.swift in Sources */,
+				6156D64224907D8800ED3786 /* DetailViewController.swift in Sources */,
 				614FE62E248FB50F00F1318F /* AppDelegate.swift in Sources */,
 				614FE652248FBA5300F1318F /* Configurations.swift in Sources */,
 				614FE662248FC2F900F1318F /* IntExtension.swift in Sources */,
